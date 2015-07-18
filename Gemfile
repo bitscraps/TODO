@@ -14,6 +14,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt', '~> 3.1.7'
 gem 'unicorn'
 
+gem 'doorkeeper'
+
 group :development, :test do
   gem 'web-console', '~> 2.0'
   gem 'spring'
