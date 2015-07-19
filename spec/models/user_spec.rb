@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 describe User do
+  it 'has many lists' do
+    expect(User.new).to have_many :lists
+  end
+
   it 'should validate presence of a username' do
     expect(User.new).to validate_presence_of :username
   end

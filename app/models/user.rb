@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   attr_accessor :password, :password_confirmation
 
+  has_many :lists
+
   validates_presence_of :username, :password
   validates_uniqueness_of :username
   validates_confirmation_of :password
