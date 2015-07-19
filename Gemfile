@@ -21,6 +21,7 @@ group :development, :test do
   gem 'spring'
   gem 'shoulda-matchers'
   gem 'rspec-rails'
+  gem 'jasmine-rails'
 end
 
 group :test do
