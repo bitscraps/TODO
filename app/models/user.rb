@@ -9,6 +9,10 @@ class User < ActiveRecord::Base
 
   before_save :hash_new_password
 
+  def is_password?(password)
+    BCrypt::Password.new(self.hashed_password).is_password? password
+  end
+
   private
   def hash_new_password
     self.hashed_password = BCrypt::Password.create(self.password)
