@@ -101,3 +101,16 @@ header {
 .close {
   color:#000;
 }
+
+.error {
+  width:200px;
+  text-align:center;
+  color:red;
+  border: 1px solid red;
+  border-radius:3px;
+  position:absolute;
+  top:50px;
+  left:50%;
+  background-color:#FFF;
+  margin-left:-100px;
+}
