@@ -15,18 +15,49 @@ feature 'a user can manage their lists' do
 
   scenario 'can create a new list', js:true do
     login
-  
+
     click_button 'Create a new list'
 
     within '.list_form' do
       fill_in :list_name, with: 'a new list'
       click_button 'Create List'
     end
-    
+
     wait_for_ajax
 
     expect(page).to have_content 'a new list'
 
+  end
+
+  scenario 'can archive a list', js: true do
+    list = create(:list, user: @user)
+
+    login
+
+    click_link 'Archive List'
+
+    wait_for_ajax
+
+    expect(page).to_not have_content list.name
+  end
+
+  scenario 'can change the name of a list', js: true do
+    list = create(:list, user: @user)
+
+    login
+
+    click_link 'Change Name'
+
+    wait_for_ajax
+
+    within '.form' do
+      fill_in :list_name, with: 'a new name'
+      click_button 'Change Name'
+    end
+
+    wait_for_ajax
+
+    expect(page).to have_content 'a new name'
   end
 
   def login
