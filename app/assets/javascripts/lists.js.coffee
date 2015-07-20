@@ -20,22 +20,28 @@ class Lists
     )
 
   renderListBlock: (list) ->
-    list_item = $('<div>'+list.name+'</div>')
+    list_item = $('<div class="list" data-id='+list.id+'>'+list.name+'</div>')
     this_list = this
 
     archive = $('<a href="#" data-id='+list.id+'>Archive List</div>')
-    archive.on('click', ->
+    archive.on('click', (event)->
+      event.stopPropagation()
       this_list.archiveList(this)
     )
 
     list_item.append(archive)
 
     change_name = $('<a href="#" data-id='+list.id+' data-name="'+list.name+'">Change Name</div>')
-    change_name.on('click', ->
+    change_name.on('click', (event)->
+      event.stopPropagation()
       this_list.renderChangeListForm(this)
     )
 
     list_item.append(change_name)
+
+    list_item.on('click', ->
+      window.Tasks.renderTasks($(this).data('id'))
+    )
 
     $('body').append(list_item)
 
