@@ -11,7 +11,7 @@ class Login
     password_label = $('<label>Password</label>')
     loginContainer.append(password_label)
 
-    password = $('<input name=password id="password">')
+    password = $('<input type=password name=password id="password">')
     loginContainer.append(password)
 
     loginButton = $('<button>Log In</button>')
