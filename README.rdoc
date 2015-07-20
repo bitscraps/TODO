@@ -1,28 +1,13 @@
-== README
+== TODO App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+An implementation of a todo app.
 
-Things you may want to cover:
+== Installing
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+`git clone git@github.com:bitscraps/TODO.git`
+`cd TODO`
+`cp config/database.yml.sample config/database.yml `
+enter your postgres details into the development block
+`bundle install`
+`bin/rake db:setup`
+`bin/rails s`
