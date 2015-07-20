@@ -21,6 +21,8 @@ group :development, :test do
   gem 'spring'
   gem 'shoulda-matchers'
   gem 'rspec-rails'
+  gem 'capybara'
+  gem 'poltergeist'
 end
 
 group :test do

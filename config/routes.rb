@@ -6,4 +6,6 @@ Rails.application.routes.draw do
     end
     resource :session, only: [:create, :destroy]
   end
+
+  root 'front#index'
 end
