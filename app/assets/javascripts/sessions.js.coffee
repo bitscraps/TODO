@@ -1,4 +1,4 @@
-class Login
+class Sessions
   renderLogin: () ->
     loginContainer = $('<div class=login>')
 
@@ -28,7 +28,10 @@ class Login
     )
     loginContainer.append(createLink)
 
-    $('.content').append(loginContainer)
+    $('.left-action').html('')
+    $('.right-action').html('')
+    $('.title').html('wrangler')
+    $('.content').html(loginContainer)
 
   attemptLogin: () ->
     $.post('/api/session',
@@ -39,6 +42,12 @@ class Login
       $('.content').append($('<div class="error">Unable to login</div>'))
     )
 
+  logout: () ->
+    $.ajax('/api/session',
+      type: 'DELETE'
+    ).done(=>
+      this.renderLogin()
+    )
+
 $ ->
-  window.Login = new Login()
-  window.Login.renderLogin()
+  window.Sessions = new Sessions()

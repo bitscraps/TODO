@@ -30,3 +30,24 @@ feature 'an unauthenticated user' do
     expect(page).to have_content 'Your Lists'
   end
 end
+
+feature 'an authenticated user' do
+  before(:each) do
+    create(:user, username: 'graham', password: 'password')
+  end
+
+  scenario 'can log out', js: true do
+    visit '/'
+    within '.login' do
+      fill_in :username, with: 'graham'
+      fill_in :password, with: 'password'
+      click_button 'Log In'
+    end
+
+    click_link 'logout'
+
+    wait_for_ajax
+
+    expect(page).to_not have_content 'My Lists'
+  end
+end

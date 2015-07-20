@@ -21,4 +21,14 @@
 </div>
 
 </body>
+
+<script>
+  $(document).ready(function() {
+    <% if session[:logged_in].nil? %>
+      window.Sessions.renderLogin();
+    <% else %>
+      window.Lists.renderLists();
+    <% end %>
+  })
+</script>
 </html>

@@ -11,6 +11,12 @@ class Lists
     )
     $('.right-action').html(new_list)
 
+    logout = $('<a href=#>logout</a>')
+    logout.on('click', =>
+      window.Sessions.logout()
+    )
+    $('.left-action').html(logout)
+
     $.get('/api/lists')
     .done( (data)=>
       $.each(data, (index, list)=>
@@ -18,7 +24,6 @@ class Lists
       )
     )
 
-    $('.left-action').html('')
 
   renderListBlock: (list) ->
     list_item = $('<div class="list" data-id='+list.id+'><span>'+list.name+'</span></div>')
