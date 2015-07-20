@@ -13,6 +13,22 @@ feature 'a user can manage their lists' do
     expect(page).to have_content 'A sample list'
   end
 
+  scenario 'can create a new list', js:true do
+    login
+  
+    click_button 'Create a new list'
+
+    within '.list_form' do
+      fill_in :list_name, with: 'a new list'
+      click_button 'Create List'
+    end
+    
+    wait_for_ajax
+
+    expect(page).to have_content 'a new list'
+
+  end
+
   def login
     visit '/'
 

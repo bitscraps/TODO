@@ -3,6 +3,7 @@ class Api::ListsController < ApiController
 
   def create
     list = @current_user.lists.new(list_params)
+    list.archived = false
 
     if list.save
       render json: list, status: 201
