@@ -16,9 +16,9 @@ feature 'a user can manage their lists' do
   scenario 'can create a new list', js:true do
     login
 
-    click_button 'Create a new list'
+    click_link 'Create a new list'
 
-    within '.list_form' do
+    within '.form' do
       fill_in :list_name, with: 'a new list'
       click_button 'Create List'
     end

@@ -1,16 +1,15 @@
 class Lists
   renderLists: () ->
     lists = $('<div class=lists>')
-    title = $('<h1>Your Lists</h1>')
 
-    lists.append(title)
-    $('body').html(lists)
+    $('.title').html('Your Lists')
+    $('.content').html(lists)
 
-    new_list = $('<button>Create a new list</button>')
+    new_list = $('<a href=# >Create a new list</a>')
     new_list.on('click', =>
       this.renderNewListForm()
     )
-    lists.append(new_list)
+    $('.right-action').html(new_list)
 
     $.get('/api/lists')
     .done( (data)=>
@@ -19,9 +18,13 @@ class Lists
       )
     )
 
+    $('.left-action').html('')
+
   renderListBlock: (list) ->
-    list_item = $('<div class="list" data-id='+list.id+'>'+list.name+'</div>')
+    list_item = $('<div class="list" data-id='+list.id+'><span>'+list.name+'</span></div>')
     this_list = this
+
+    actions = $('<div class="actions"></div>')
 
     archive = $('<a href="#" data-id='+list.id+'>Archive List</div>')
     archive.on('click', (event)->
@@ -29,7 +32,7 @@ class Lists
       this_list.archiveList(this)
     )
 
-    list_item.append(archive)
+    actions.append(archive)
 
     change_name = $('<a href="#" data-id='+list.id+' data-name="'+list.name+'">Change Name</div>')
     change_name.on('click', (event)->
@@ -37,17 +40,19 @@ class Lists
       this_list.renderChangeListForm(this)
     )
 
-    list_item.append(change_name)
+    actions.append(change_name)
 
     list_item.on('click', ->
       window.Tasks.renderTasks($(this).data('id'))
     )
 
-    $('body').append(list_item)
+    list_item.append(actions)
+
+    $('.content').append(list_item)
 
 
   renderNewListForm: ->
-    form = $('<div class="list_form"></div>')
+    form = $('<div class="form"></div>')
 
     name_label = $('<label>Name</label>')
     form.append(name_label)
@@ -62,12 +67,20 @@ class Lists
       ).done( ->
         window.Lists.renderLists()
       ).fail( ->
-        $('body').append($('<div class="error">Unable to create list</div>'))
+        $('.content').append($('<div class="error">Unable to create list</div>'))
       )
     )
     form.append(createButton)
 
-    $('body').append(form)
+    close = $("<a href=# class='close'>Cancel</a>")
+    close.on('click', ->
+      $('.overlay').remove()
+      $('.form').remove()
+    )
+    form.append(close)
+
+    $('.content').append("<div class='overlay'></div>")
+    $('.content').append(form)
 
   renderChangeListForm: (click)->
     form = $('<div class="form"></div>')
@@ -86,12 +99,20 @@ class Lists
       ).done( ->
         window.Lists.renderLists()
       ).fail( ->
-        $('body').append($('<div class="error">Unable to change list name</div>'))
+        $('.content').append($('<div class="error">Unable to change list name</div>'))
       )
     )
     form.append(createButton)
 
-    $('body').append(form)
+    close = $("<a href=# class='close'>Cancel</a>")
+    close.on('click', ->
+      $('.overlay').remove()
+      $('.form').remove()
+    )
+    form.append(close)
+
+    $('.content').append("<div class='overlay'></div>")
+    $('.content').append(form)
 
   archiveList: (click)->
     $.ajax('/api/lists/'+$(click).data('id'),

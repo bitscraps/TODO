@@ -11,14 +11,66 @@ feature 'a user can manage their tasks' do
 
     login_and_navigate_to_task
 
-    expect(page).to have_content task.name
+    within '.tasks' do
+      expect(page).to have_content task.name
+    end
   end
 
-  pending 'can create a new tasks'
+  scenario 'can create a new task', js: true do
+    login_and_navigate_to_task
 
-  pending 'can complete a task'
+    within '.right-action' do
+      click_link 'Create a new task'
+    end
 
-  pending 'can change the name of a task'
+    within '.form' do
+      fill_in :task_name, with: 'a new task'
+      click_button 'Create Task'
+    end
+
+    within '.task' do
+      expect(page).to have_content 'a new task'
+    end
+  end
+
+  scenario 'can complete a task', js: true do
+    task = create(:task, list: @list)
+
+    login_and_navigate_to_task
+
+    click_link 'Complete'
+
+    wait_for_ajax
+
+    expect(page).to have_css("div#task#{task.id}.complete")
+  end
+
+  it 'can change the name of a task', js: true do
+    task = create(:task, list: @list)
+
+    login_and_navigate_to_task
+
+    click_link 'Change Name'
+
+    wait_for_ajax
+
+    within '.form' do
+      fill_in :task_name, with: 'a new name'
+      click_button 'Change Name'
+    end
+
+    wait_for_ajax
+
+    expect(page).to have_content 'a new name'
+  end
+
+  it 'can go back to the lists view', js: true do
+    login_and_navigate_to_task
+
+    click_link 'back to lists'
+
+    expect(page).to have_content @list.name
+  end
 
   def login_and_navigate_to_task
     visit '/'
@@ -31,6 +83,8 @@ feature 'a user can manage their tasks' do
 
     wait_for_ajax
 
-    find('.list', :text => @list.name).click
+    find('span', :text => @list.name).click
+
+    wait_for_ajax
   end
 end

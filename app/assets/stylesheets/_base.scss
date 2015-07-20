@@ -1,0 +1,103 @@
+@import 'variables';
+
+body {
+  background-color: $background-color;
+  font-family: $font;
+  font-size: 18px;
+  margin:0;
+}
+
+header {
+  width:100%;
+  box-sizing: border-box;
+  background-color: $header-color;
+  color:#FFF;
+  padding:10px 0;
+
+  .left-action {
+    width:25%;
+    display:inline-block;
+    box-sizing: border-box;
+    text-align:left;
+
+    a {
+      color: #FFF;
+    }
+  }
+
+  .title {
+    width:48%;
+    display:inline-block;
+    box-sizing: border-box;
+    text-align:center;
+  }
+
+  .right-action {
+    width:25%;
+    display:inline-block;
+    box-sizing: border-box;
+    text-align:right;
+
+    a {
+      color: #FFF;
+    }
+  }
+}
+
+.list, .task {
+  width:300px;
+  color:#FFF;
+  padding:20px;
+  margin:30px;
+  text-align:left;
+  display:inline-block;
+  background-color: $secondary-color;
+
+  a {
+    clear:left;
+    display:inline-block;
+    padding:5px;
+    float:right;
+    color:#fff;
+  }
+}
+
+.list {
+  cursor: pointer;
+}
+
+.complete {
+  text-decoration: line-through;
+
+  .actions {
+    display:none;
+  }
+}
+
+.form {
+  width:400px;
+  padding:20px;
+  border:1px SOLID #CCCCCC;
+  margin:50px auto;
+  background-color:#FFFFFF;
+  text-align:center;
+  border-radius: 3px;
+  position:fixed;
+  left:50%;
+  margin-left:-200px;
+  z-index: 50;
+}
+
+.overlay {
+  content: '';
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.close {
+  color:#000;
+}

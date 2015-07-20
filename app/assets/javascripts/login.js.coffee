@@ -21,7 +21,7 @@ class Login
     )
     loginContainer.append(loginButton)
 
-    $('body').append(loginContainer)
+    $('.content').append(loginContainer)
 
   attemptLogin: () ->
     $.post('/api/session',
@@ -29,7 +29,7 @@ class Login
     ).done( ->
        window.Lists.renderLists()
     ).fail( ->
-      $('body').append($('<div class="error">Unable to login</div>'))
+      $('.content').append($('<div class="error">Unable to login</div>'))
     )
 
 $ ->

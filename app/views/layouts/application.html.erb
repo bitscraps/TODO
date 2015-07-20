@@ -7,8 +7,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
+<header>
+  <div class="left-action">
+  </div>
+  <div class="title">
+    Wrangler
+  </div>
+  <div class="right-action">
+  </div>
+</header>
+<div class="content">
+  <%= yield %>
+</div>
 
 </body>
 </html>
