@@ -21,6 +21,13 @@ class Login
     )
     loginContainer.append(loginButton)
 
+    createLink = $('<a href=#>Create an account</a>')
+    createLink.on('click', =>
+      window.Account.renderCreateAccount()
+
+    )
+    loginContainer.append(createLink)
+
     $('.content').append(loginContainer)
 
   attemptLogin: () ->
