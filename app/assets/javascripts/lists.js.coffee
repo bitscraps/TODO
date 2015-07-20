@@ -6,5 +6,15 @@ class Lists
     lists.append(title)
     $('body').html(lists)
 
+    $.get('/api/lists')
+    .done( (data)=>
+      $.each(data, (index, list)=>
+        this.renderListBlock(list)
+      )
+    )
+
+  renderListBlock: (list) ->
+    $('body').append('<div>'+list.name+'</div>')
+
 $ ->
   window.Lists = new Lists

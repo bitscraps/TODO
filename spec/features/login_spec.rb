@@ -4,8 +4,6 @@ feature 'an unauthenticated user' do
   before(:each) do
     user = User.new(username: 'graham', password: 'password')
     user.save
-
-    puts User.all.inspect
   end
 
   scenario 'cannot login if their details are incorrect', js: true do

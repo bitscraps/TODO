@@ -2,8 +2,6 @@ class Api::SessionsController < ApiController
   def create
     user = User.where(username: params[:username]).first
 
-    puts User.all.inspect
-
     if user && user.is_password?(params[:password])
       session[:logged_in] = user.id
       render json: {}, status: 201
