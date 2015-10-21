@@ -1,0 +1,5 @@
+{
+  "checkpoints": {
+    "DEV": { "url": "http://wrangler-todo.herokuapp.com", "overdue": "10M" },
+  }
+}
