@@ -17,5 +17,4 @@ enter your postgres details into the development block
 ``bin/rake db:setup``
 
 Launch using 
-
 ``bin/rails s``
